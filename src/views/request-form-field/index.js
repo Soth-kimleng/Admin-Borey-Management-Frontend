@@ -58,13 +58,12 @@ const RequestFormField = () => {
     setSelectedRow(row)
     // const { row } = props
     console.log(row.path)
-    
   }
 
   const fetchGeneralForm = async () => {
     try {
       const res = await axios({
-        url: 'http://localhost:8000/api/requestforms',
+        url: 'https://api.borey.me/api/requestforms',
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -87,15 +86,18 @@ const RequestFormField = () => {
     }
   }
 
-  const getImageItems = (row) => {
+  const getImageItems = row => {
     const imageItems = []
     console.log(row.path)
-    let images = row.path.split(','); // Display only 4 images initially
+    let images = row.path.split(',') // Display only 4 images initially
 
     images.map((item, index) => {
       imageItems.push(
         <Grid item xs={12} sm={12} md={12} key={index}>
-          <Box sx={{ height: '100%', width: '100%' }} onClick={() => handleViewImage(`https://gateway.ipfs.io/ipfs/${item}`)}>
+          <Box
+            sx={{ height: '100%', width: '100%' }}
+            onClick={() => handleViewImage(`https://gateway.ipfs.io/ipfs/${item}`)}
+          >
             <img
               src={`https://gateway.ipfs.io/ipfs/${item}`}
               loading='lazy'
@@ -118,7 +120,7 @@ const RequestFormField = () => {
 
     try {
       const res = await axios({
-        url: `http://localhost:8000/api/requestforms/${info.id}`,
+        url: `https://api.borey.me/api/requestforms/${info.id}`,
         method: 'POST',
         data: form,
         headers: {
@@ -134,7 +136,7 @@ const RequestFormField = () => {
     }
   }
 
-  const handleViewImage = (url) => {
+  const handleViewImage = url => {
     window.open(url, '_blank')
   }
 
@@ -235,7 +237,7 @@ const RequestFormField = () => {
                           <TableCell>Image</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody >
+                      <TableBody>
                         <TableCell sx={{ minWidth: 300, verticalAlign: 'top' }}>
                           <Typography variant='body1' sx={{ textAlign: 'left' }}>
                             {selectedRow.request_description}

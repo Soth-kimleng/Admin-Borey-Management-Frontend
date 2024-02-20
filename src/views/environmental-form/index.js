@@ -27,7 +27,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
-import moment from 'moment';
+import moment from 'moment'
 import ImageList from '@mui/material/ImageList'
 
 const EnvironmentalFormField = () => {
@@ -60,13 +60,12 @@ const EnvironmentalFormField = () => {
     setSelectedRow(row)
     // const { row } = props
     console.log(row.path)
- 
   }
 
   const fetchGeneralForm = async () => {
     try {
       const res = await axios({
-        url: 'http://localhost:8000/api/form_environments',
+        url: 'https://api.borey.me/api/form_environments',
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -89,15 +88,18 @@ const EnvironmentalFormField = () => {
     }
   }
 
-  const getImageItems = (row) => {
+  const getImageItems = row => {
     const imageItems = []
     console.log(row.path)
-    let images = row.path.split(','); // Display only 4 images initially
+    let images = row.path.split(',') // Display only 4 images initially
 
     images.map((item, index) => {
       imageItems.push(
         <Grid item xs={12} sm={12} md={12} key={index}>
-          <Box sx={{ height: '100%', width: '100%' }} onClick={() => handleViewImage(`https://gateway.ipfs.io/ipfs/${item}`)}>
+          <Box
+            sx={{ height: '100%', width: '100%' }}
+            onClick={() => handleViewImage(`https://gateway.ipfs.io/ipfs/${item}`)}
+          >
             <img
               src={`https://gateway.ipfs.io/ipfs/${item}`}
               loading='lazy'
@@ -115,12 +117,12 @@ const EnvironmentalFormField = () => {
   const onUpdateStatus = async (e, info) => {
     const newStatus = e.target.value
     const form = new FormData()
-    console.log(info);
+    console.log(info)
     form.append('environment_status', newStatus)
 
     try {
       const res = await axios({
-        url: `http://localhost:8000/api/form_environments/${info.id}`,
+        url: `https://api.borey.me/api/form_environments/${info.id}`,
         method: 'POST',
         data: form,
         headers: {
@@ -132,14 +134,13 @@ const EnvironmentalFormField = () => {
       fetchGeneralForm()
     } catch (e) {
       console.log(e)
-      toast.error("Failed to Update")
+      toast.error('Failed to Update')
     }
-
   }
 
-  const handleViewImage = (url) => {
+  const handleViewImage = url => {
     // router.push(`https://gateway.ipfs.io/ipfs/${selectedRow.path}`)
-   
+
     window.open(url, '_blank')
   }
 
@@ -192,7 +193,7 @@ const EnvironmentalFormField = () => {
                       <TableCell sx={{ minWidth: 100 }}>Category</TableCell>
                       <TableCell sx={{ minWidth: 50 }}>Problem</TableCell>
                       <TableCell sx={{ minWidth: 50 }}>Created at</TableCell>
-                      <TableCell sx={{ minWidth: 50 }}>Status</TableCell>         
+                      <TableCell sx={{ minWidth: 50 }}>Status</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

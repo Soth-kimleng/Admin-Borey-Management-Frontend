@@ -34,7 +34,7 @@ const createPost = () => {
   const JWT = process.env.JWT
   const [uploadingImage, setUploadingImage] = useState('')
   // const [collapse, setCollapse] = useState(false)
-  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([])
   const [imageCIDs, setImageCIDs] = useState([])
   const [contentType, setContentType] = useState('')
   // const [images, setImages] = useState([])
@@ -97,7 +97,7 @@ const createPost = () => {
         const imageURL = `https://gateway.ipfs.io/ipfs/${image_cid}`
         uploadedImageURLs.push(imageURL)
         setUploadedImages(uploadedImageURLs)
-        
+
         //display success message
         setImageCIDs(uploadedImageCIDs)
         toast.success('Upload image successfully')
@@ -161,7 +161,7 @@ const createPost = () => {
 
     try {
       const res = await axios({
-        url: 'http://localhost:8000/api/posts',
+        url: 'https://api.borey.me/api/posts',
         method: 'POST',
         data: form,
         headers: {
@@ -170,7 +170,7 @@ const createPost = () => {
       })
       console.log(res)
       toast.success('Post uploaded successfully')
-      router.push('/');
+      router.push('/')
     } catch (err) {
       console.error(err)
     }

@@ -69,13 +69,12 @@ const SecurityBillForm = () => {
     setSelectedRow(row)
     // const { row } = props
     console.log(row.path)
- 
   }
 
   const fetchGeneralForm = async () => {
     try {
       const res = await axios({
-        url: 'http://localhost:8000/api/securitybills',
+        url: 'https://api.borey.me/api/securitybills',
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -98,11 +97,9 @@ const SecurityBillForm = () => {
     }
   }
 
-  
-
-  const handleViewImage = (url) => {
+  const handleViewImage = url => {
     // router.push(`https://gateway.ipfs.io/ipfs/${selectedRow.path}`)
-   
+
     window.open(url, '_blank')
   }
 
@@ -154,7 +151,7 @@ const SecurityBillForm = () => {
                       <TableCell sx={{ minWidth: 150 }}>FullName</TableCell>
                       <TableCell sx={{ minWidth: 100 }}>Category</TableCell>
                       <TableCell sx={{ minWidth: 50 }}>Created at</TableCell>
-                      <TableCell sx={{ minWidth: 50 }}>Status</TableCell>         
+                      <TableCell sx={{ minWidth: 50 }}>Status</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -162,7 +159,6 @@ const SecurityBillForm = () => {
                       data.length > 0 &&
                       data
                         .filter(info => selectedCompany === '' || info.user.companies.company_name === selectedCompany)
-
 
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map(info => {
@@ -175,7 +171,7 @@ const SecurityBillForm = () => {
                                 <TableCell align='left'>{info.user_id}</TableCell>
                                 <TableCell align='left'>{info.fullname}</TableCell>
                                 <TableCell align='left'>{info.category}</TableCell>
-                                
+
                                 <TableCell align='left'> {moment(info.created_at).format('YYYY-MM-DD')}</TableCell>
                                 <TableCell align='left'>{info.payment_status}</TableCell>
                               </TableRow>
@@ -194,7 +190,6 @@ const SecurityBillForm = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-              
             </Paper>
           )}
         </Grid>

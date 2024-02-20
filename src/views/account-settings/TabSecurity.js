@@ -91,7 +91,7 @@ const TabSecurity = () => {
       try {
         const response = await axios({
           method: 'POST',
-          url: 'http://localhost:8000/api/changepassword',
+          url: 'https://api.borey.me/api/changepassword',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`

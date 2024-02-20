@@ -56,7 +56,7 @@ const SurveyFormField = () => {
     e.preventDefault()
     try {
       const res = await axios({
-        url: 'http://localhost:8000/api/surveys',
+        url: 'https://api.borey.me/api/surveys',
         method: 'POST',
         data: surveyData,
         headers: {
@@ -179,7 +179,7 @@ const SurveyFormField = () => {
       }
       console.log(questionField)
       await axios({
-        url: 'http://localhost:8000/api/questions',
+        url: 'https://api.borey.me/api/questions',
         // url: '',
         method: 'POST',
         data: questionField,
@@ -193,7 +193,7 @@ const SurveyFormField = () => {
           }
           console.log(answerText)
           await axios({
-            url: `http://localhost:8000/api/questions/${res.data.id}/answers`,
+            url: `https://api.borey.me/api/questions/${res.data.id}/answers`,
             // url: '',
             method: 'POST',
             data: answerText,

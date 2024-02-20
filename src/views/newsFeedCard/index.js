@@ -41,7 +41,7 @@ const NewsFeedCard = props => {
   const [viewAllImages, setViewAllImages] = useState(false)
   const [comment, setComment] = useState('')
   const [likeClicked, setLikeClicked] = useState(false)
-  const [cardHeight, setCardHeight] = useState('auto');
+  const [cardHeight, setCardHeight] = useState('auto')
   const token = localStorage.getItem('atoken')
   console.log('Each data for newsfeed card', cardData)
   const handleClick = () => {
@@ -57,7 +57,7 @@ const NewsFeedCard = props => {
     console.log('Id delete post: ', cardData.id)
     try {
       const res = await axios({
-        url: `http://localhost:8000/api/posts/${cardData.id}`,
+        url: `https://api.borey.me/api/posts/${cardData.id}`,
         method: 'delete',
         headers: {
           Authorization: `Bearer ${token}`
@@ -78,7 +78,7 @@ const NewsFeedCard = props => {
       */
     try {
       const res = await axios({
-        url: `http://localhost:8000/api/postcomment`,
+        url: `https://api.borey.me/api/postcomment`,
         method: 'POST',
         data: {
           post_id: cardData.id,
@@ -124,7 +124,7 @@ const NewsFeedCard = props => {
     if (!likeClicked) {
       try {
         const res = await axios({
-          url: `http://localhost:8000/api/postlike`,
+          url: `https://api.borey.me/api/postlike`,
           method: 'POST',
           data: {
             post_id: cardData.id
@@ -152,7 +152,7 @@ const NewsFeedCard = props => {
     } else {
       try {
         const res = await axios({
-          url: `http://localhost:8000/api/postlike`,
+          url: `https://api.borey.me/api/postlike`,
           method: 'delete',
           data: {
             post_id: cardData.id
@@ -183,21 +183,19 @@ const NewsFeedCard = props => {
 
     if (viewAllImages) {
       images = cardData.image.split(',') // Display all images if 'viewAllImages' is true
-      
     }
-
 
     images.map((item, index) => {
       imageItems.push(
         <Grid item xs={12} sm={12} md={12} key={index}>
-          <Box sx={{height: '100%', width: '100%'}}>
-          <img
-            src={`https://gateway.ipfs.io/ipfs/${item}`}
-            loading='lazy'
-            alt={`Image ${index + 1}`}
-            style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} // Set square aspect ratio for images
-          />
-          </Box> 
+          <Box sx={{ height: '100%', width: '100%' }}>
+            <img
+              src={`https://gateway.ipfs.io/ipfs/${item}`}
+              loading='lazy'
+              alt={`Image ${index + 1}`}
+              style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} // Set square aspect ratio for images
+            />
+          </Box>
         </Grid>
       )
     })
@@ -217,14 +215,14 @@ const NewsFeedCard = props => {
 
   useEffect(() => {
     if (viewAllImages) {
-      setCardHeight('auto');
+      setCardHeight('auto')
     } else {
-      setCardHeight('fit-content');
+      setCardHeight('fit-content')
     }
-  }, [viewAllImages]);
+  }, [viewAllImages])
   //src='/images/avatars/4.png'
   return (
-    <Card sx={{ border: 0, boxShadow: 0, color: 'common.white', backgroundColor: 'info.main', height: 'auto'}}>
+    <Card sx={{ border: 0, boxShadow: 0, color: 'common.white', backgroundColor: 'info.main', height: 'auto' }}>
       <CardContent sx={{ padding: theme => `${theme.spacing(3.25, 5, 4.5)} !important` }}>
         <Typography
           variant='h6'
@@ -260,7 +258,7 @@ const NewsFeedCard = props => {
         <Typography variant='body2' sx={{ marginBottom: 3, color: 'common.white', textAlign: 'left' }}>
           {cardData.description}
         </Typography>
-        <ImageList container >
+        <ImageList container>
           {console.log(getImageItems().length)}
           {getImageItems()}
         </ImageList>

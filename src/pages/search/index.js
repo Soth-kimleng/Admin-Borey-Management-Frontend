@@ -46,7 +46,7 @@ const AlignItemsList = () => {
   const performSearch = async () => {
     try {
       const res = await axios({
-        url: `http://127.0.0.1:8000/api/search/`,
+        url: `https://api.borey.me/api/search/`,
         method: 'GET',
         data: {
           keyword: searchKeyWord
@@ -149,19 +149,34 @@ const AlignItemsList = () => {
       searchResults.formGenerals.original.map(item => {
         formGeneral.push(
           <Fragment key={item.id}>
-            <TableRow hover role='checkbox' tabIndex={-1} >
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}> {item.user_id}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}> {item.fullname}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}>General Form</TableCell>
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}>{item.category}</TableCell>
+            <TableRow hover role='checkbox' tabIndex={-1}>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                {' '}
+                {item.user_id}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                {' '}
+                {item.fullname}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                General Form
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                {item.category}
+              </TableCell>
               <TableCell align='left' onClick={() => handleViewDetail(item)}>
                 <Button size='small' variant='outlined' sx={{ marginBottom: 7 }}>
                   View Detail
                 </Button>
               </TableCell>
               {/* <TableCell align='left'> {format(new Date(info.created_at), 'MMM dd, yyyy')}</TableCell> */}
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}> {moment(item.created_at).format('YYYY-MM-DD')}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/general-fixing')}>{item.general_status === 'done' ? '✅' : 'Pending'}</TableCell>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                {' '}
+                {moment(item.created_at).format('YYYY-MM-DD')}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/general-fixing')}>
+                {item.general_status === 'done' ? '✅' : 'Pending'}
+              </TableCell>
             </TableRow>
           </Fragment>
         )
@@ -174,19 +189,34 @@ const AlignItemsList = () => {
       searchResults.formEnvironments.original.map(item => {
         formGeneral.push(
           <Fragment key={item.id}>
-            <TableRow hover role='checkbox' tabIndex={-1} >
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}> {item.user_id}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}> {item.fullname}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>Environmental Form</TableCell>
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>{item.category}</TableCell>
+            <TableRow hover role='checkbox' tabIndex={-1}>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                {' '}
+                {item.user_id}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                {' '}
+                {item.fullname}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                Environmental Form
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                {item.category}
+              </TableCell>
               <TableCell align='left' onClick={() => handleViewDetail(item)}>
                 <Button size='small' variant='outlined' sx={{ marginBottom: 7 }}>
                   View Detail
                 </Button>
               </TableCell>
               {/* <TableCell align='left'> {format(new Date(info.created_at), 'MMM dd, yyyy')}</TableCell> */}
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}> {moment(item.created_at).format('YYYY-MM-DD')}</TableCell>
-              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>{item.environment_status === 'done' ? '✅' : 'Pending'}</TableCell>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                {' '}
+                {moment(item.created_at).format('YYYY-MM-DD')}
+              </TableCell>
+              <TableCell align='left' onClick={() => router.push('/environment-fixing')}>
+                {item.environment_status === 'done' ? '✅' : 'Pending'}
+              </TableCell>
             </TableRow>
           </Fragment>
         )
@@ -206,7 +236,7 @@ const AlignItemsList = () => {
           const res = await axios({
             method: 'GET',
             // baseURL: API_URL,
-            url: 'http://127.0.0.1:8000/api/loggeduser',
+            url: 'https://api.borey.me/api/loggeduser',
             headers: {
               Authorization: `Bearer ${token}`
             }

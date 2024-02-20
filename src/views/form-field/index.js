@@ -121,7 +121,7 @@ const FormField = () => {
 
     try {
       const res = await axios({
-        url: `http://localhost:8000/api/form_generals/${info.id}`,
+        url: `https://api.borey.me/api/form_generals/${info.id}`,
         method: 'POST',
         data: form,
         headers: {
