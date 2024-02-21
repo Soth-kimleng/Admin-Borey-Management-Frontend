@@ -1,4 +1,5 @@
 // ** React Imports
+import os from 'os'
 import { useState, useContext } from 'react'
 
 // ** Next Imports
@@ -63,7 +64,7 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   }
 }))
 
-const LoginPage = () => {
+const LoginPage = ({ serverIPAddress }) => {
   console.log('LoginPage')
 
   const {
@@ -219,6 +220,7 @@ const LoginPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 500, marginBottom: 1.5 }}>
               Welcome to Company Borey Management Admin! 👋🏻
             </Typography>
+            <Typography variant='h3'>{serverIPAddress}</Typography>
             <Typography variant='body2'>Please sign-in to your admin account and start the using the tool</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
@@ -311,6 +313,31 @@ const LoginPage = () => {
     </Box>
   )
 }
+
+export async function getServerSideProps() {
+  function getIPAddress() {
+    const interfaces = os.networkInterfaces()
+    let ipAddress
+
+    Object.keys(interfaces).forEach(interfaceName => {
+      const interfaceData = interfaces[interfaceName]
+      interfaceData.forEach(data => {
+        if (!data.internal && data.family === 'IPv4') {
+          ipAddress = data.address
+        }
+      })
+    })
+
+    return ipAddress
+  }
+
+  return {
+    props: {
+      serverIPAddress: getIPAddress()
+    }
+  }
+}
+
 LoginPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
 export default LoginPage

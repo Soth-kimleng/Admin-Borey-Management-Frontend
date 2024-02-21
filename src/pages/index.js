@@ -1,3 +1,4 @@
+import os from 'os'
 import Grid from '@mui/material/Grid'
 
 // ** Icons Imports
@@ -27,7 +28,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
 
-const Dashboard = () => {
+const Dashboard = ({ serverIPAddress }) => {
   const {
     contextTokenValue: { token }
   } = useContext(SettingsContext)
@@ -174,6 +175,9 @@ const Dashboard = () => {
       )}
       {currentUser !== null && (
         <Grid container spacing={6}>
+          <Grid item xs={12}>
+            {serverIPAddress}
+          </Grid>
           <Grid item xs={12} md={4}>
             <Trophy info={currentUser} token={token} />
           </Grid>
@@ -236,6 +240,30 @@ const Dashboard = () => {
       )}
     </ApexChartWrapper>
   )
+}
+
+export async function getServerSideProps() {
+  function getIPAddress() {
+    const interfaces = os.networkInterfaces()
+    let ipAddress
+
+    Object.keys(interfaces).forEach(interfaceName => {
+      const interfaceData = interfaces[interfaceName]
+      interfaceData.forEach(data => {
+        if (!data.internal && data.family === 'IPv4') {
+          ipAddress = data.address
+        }
+      })
+    })
+
+    return ipAddress
+  }
+
+  return {
+    props: {
+      serverIPAddress: getIPAddress()
+    }
+  }
 }
 
 export default Dashboard
